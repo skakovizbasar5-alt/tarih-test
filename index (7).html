@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Нысаналы мектеп тарих тесті</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=Golos+Text:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#f3f6f8; --surface:#ffffff; --fg:#14232e; --muted:#5b6c78; --line:#d9e2e8;
+  --accent:#0d6f8f; --accent-fg:#ffffff; --gold:#b8862b; --gold-soft:#f6ecd6;
+  --ok:#1d7a4a; --ok-soft:#e3f3ea; --bad:#b4382e; --sel:#e2f0f5;
+  --display:"PT Serif",Georgia,serif; --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f171d; --surface:#17222a; --fg:#e6edf1; --muted:#97a8b3; --line:#2a3943;
+  --accent:#3fb3d6; --accent-fg:#06202a; --gold:#e0b15a; --gold-soft:#3a2f1a;
+  --ok:#5fcf91; --ok-soft:#173a28; --bad:#f08478; --sel:#1c3846; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:680px;margin:0 auto;padding:28px 16px 56px;display:flex;flex-direction:column;gap:20px}
+.wrap.wide{max-width:1000px}
+h1,h2{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:1.75rem}
+p{margin:0}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.muted{color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.ornament{height:6px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--gold) 0 14px,transparent 14px 20px);opacity:.7}
+form{display:flex;flex-direction:column;gap:12px}
+label{font-weight:600}
+input{font:inherit;font-size:1.6rem;letter-spacing:.4em;text-align:center;padding:12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);width:100%;font-variant-numeric:tabular-nums}
+input:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{font:inherit;font-weight:600;border:0;border-radius:10px;padding:12px 18px;cursor:pointer;background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--fg);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+.err{color:var(--bad);font-weight:500;min-height:1.5em}
+.chip{display:inline-flex;font-size:.8rem;font-weight:600;padding:3px 10px;border-radius:99px;background:var(--gold-soft);color:var(--gold)}
+.chip.kz{background:var(--sel);color:var(--accent)}
+.progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.progress>i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.qtext{font-size:1.1rem;font-weight:500;white-space:pre-line}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;font:inherit;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);cursor:pointer}
+.opt b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--bg);font-size:.85rem}
+.opt[aria-pressed=true]{border-color:var(--accent);background:var(--sel)}
+.opt[aria-pressed=true] b{background:var(--accent);color:var(--accent-fg)}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.grid button{font:inherit;font-size:.85rem;padding:7px 0;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;font-variant-numeric:tabular-nums}
+.grid button.done{background:var(--sel);color:var(--accent);border-color:transparent;font-weight:600}
+.grid button.cur{outline:2px solid var(--accent)}
+.score{font-family:var(--display);font-size:3.2rem;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.confirm{border:1.5px dashed var(--gold);background:var(--gold-soft);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.sync{font-size:.8rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}
+th{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.st{font-size:.78rem;font-weight:600;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.st.done{background:var(--ok-soft);color:var(--ok)} .st.started{background:var(--gold-soft);color:var(--gold)} .st.none{background:var(--bg);color:var(--muted)}
+.code{font-family:ui-monospace,Menlo,monospace;font-weight:600}
+@media (max-width:480px){.grid{grid-template-columns:repeat(6,1fr)} h1{font-size:1.45rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main id="app" class="wrap" aria-live="polite"></main>
+
+<script>
+/* ======= ОСЫ ЖЕРГЕ Apps Script веб-қосымшасының сілтемесін қойыңыз ======= */
+const API_URL = "https://script.google.com/macros/s/AKfycbyOZOIMAMSiYd_K4e0V8P9SXZfWUSLIkKXRil-eQgoltud9Prwp2mLXJ6-u-5ZwEeYf/exec";
+/* ========================================================================= */
+
+const LETTERS = ["A","B","C","D"];
+const $app = document.getElementById("app");
+const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+async function api(payload){
+  if (!API_URL.startsWith("https://script.google.com/")) throw {code:"no_url"};
+  const r = await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+  if (!r.ok) throw {code:"http"};
+  return r.json();
+}
+const store = {
+  get(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
+};
+function netMsg(e){
+  if (e && e.code==="no_url") return "Сервер сілтемесі әлі қойылмаған. Әкімші index.html ішіндегі API_URL жолын толтыруы керек.";
+  return "Интернет байланысын тексеріп, қайталап көріңіз.";
+}
+
+/* ---------- Кіру ---------- */
+function renderLogin(msg=""){
+  $app.className="wrap";
+  $app.innerHTML=`
+  <div class="card">
+    <span class="eyebrow">Нысаналы мектеп · Тарих</span>
+    <h1>Мұғалімдерге арналған тест</h1>
+    <p class="muted">30 сұрақ: 15 — Қазақстан тарихы, 15 — Дүниежүзі тарихы. Сұрақтар мен жауап нұсқалары әр мұғалімге араласып беріледі.</p>
+    <div class="ornament" aria-hidden="true"></div>
+    <form id="lf" novalidate>
+      <label for="code">Жеке кодыңызды енгізіңіз</label>
+      <input id="code" type="text" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="•••">
+      <p class="err" id="lerr">${esc(msg)}</p>
+      <button class="btn" id="lbtn" type="submit">Кіру</button>
+    </form>
+  </div>`;
+  const inp=document.getElementById("code"); inp.focus();
+  document.getElementById("lf").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const code=inp.value.trim(), err=document.getElementById("lerr"), btn=document.getElementById("lbtn");
+    if(!/^\d{3,4}$/.test(code)){err.textContent="Кодты сандармен енгізіңіз.";return;}
+    btn.disabled=true; err.textContent=""; btn.textContent="Тексерілуде…";
+    try{
+      const res=await api({action:"login",code});
+      if(!res.ok){err.textContent=res.error==="bad_code"?"Код қате. Тексеріп, қайта енгізіңіз.":"Сервер қатесі. Сәлден соң қайталаңыз.";}
+      else if(res.role==="admin") return renderAdmin(code,res.rows);
+      else if(res.status==="done") return renderDone(res.name,res);
+      else return startTest(code,res);
+    }catch(x){err.textContent=netMsg(x);}
+    btn.disabled=false; btn.textContent="Кіру";
+  });
+}
+
+/* ---------- Тест ---------- */
+let T=null;
+function startTest(code,res){
+  const local=store.get("tt_"+code)||{};
+  const answers=Object.assign({},res.answers||{},local);
+  T={code,name:res.name,qs:res.questions,answers,idx:0,confirm:false,saving:false,pending:false,timer:null,sync:"ok"};
+  const first=T.qs.findIndex(q=>answers[q.id]===undefined); T.idx=first<0?0:first;
+  if(Object.keys(local).length) queueSave(0);
+  renderQ();
+}
+function queueSave(delay=900){clearTimeout(T.timer);T.timer=setTimeout(saveNow,delay);}
+async function saveNow(){
+  if(T.saving){T.pending=true;return;}
+  T.saving=true; setSync("saving");
+  try{const r=await api({action:"save",code:T.code,answers:T.answers}); setSync(r.ok?"ok":"fail");}
+  catch(e){setSync("fail");}
+  T.saving=false;
+  if(T.pending){T.pending=false;saveNow();}
+}
+function setSync(s){T.sync=s;const el=document.getElementById("sync");if(el)el.innerHTML=syncText();}
+function syncText(){
+  if(T.sync==="saving")return `<span class="muted">Сақталуда…</span>`;
+  if(T.sync==="fail")return `<span style="color:var(--bad)">Серверге жетпеді — жауаптар осы құрылғыда сақталды</span>`;
+  return `<span style="color:var(--ok)">✓ Сақталды</span>`;
+}
+function renderQ(){
+  const total=T.qs.length, q=T.qs[T.idx], idx=T.idx;
+  const answered=T.qs.filter(x=>T.answers[x.id]!==undefined).length;
+  $app.className="wrap";
+  $app.innerHTML=`
+  <div class="row between"><b>${esc(T.name)}</b><span class="sync" id="sync">${syncText()}</span></div>
+  <div class="progress" aria-hidden="true"><i style="width:${answered/total*100}%"></i></div>
+  <div class="card">
+    <div class="row between"><span class="eyebrow">Сұрақ ${idx+1} / ${total}</span><span class="chip ${q.c==="kz"?"kz":""}">${q.c==="kz"?"Қазақстан тарихы":"Дүниежүзі тарихы"}</span></div>
+    <p class="qtext">${esc(q.q)}</p>
+    <div class="opts">${q.o.map((o,k)=>`<button class="opt" data-i="${o.i}" aria-pressed="${T.answers[q.id]===o.i}"><b>${LETTERS[k]}</b><span>${esc(o.t)}</span></button>`).join("")}</div>
+    <div class="row between">
+      <button class="btn ghost" id="prev" ${idx===0?"disabled":""}>← Алдыңғы</button>
+      ${idx<total-1?`<button class="btn" id="next">Келесі →</button>`:`<button class="btn" id="fin">Аяқтау</button>`}
+    </div>
+  </div>
+  <div class="card" style="gap:12px">
+    <div class="row between"><span class="eyebrow">Сұрақтар картасы</span><span class="muted">Жауап берілді: ${answered}/${total}</span></div>
+    <div class="grid">${T.qs.map((x,i)=>`<button data-n="${i}" class="${T.answers[x.id]!==undefined?"done":""} ${i===idx?"cur":""}" aria-label="Сұрақ ${i+1}">${i+1}</button>`).join("")}</div>
+    ${T.confirm?confirmBox(total-answered):`<button class="btn ghost" id="fin2">Тестті аяқтау</button>`}
+  </div>`;
+  $app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    T.answers[q.id]=+b.dataset.i; store.set("tt_"+T.code,T.answers); queueSave();
+    if(T.idx<total-1)T.idx++; renderQ();
+  });
+  $app.querySelectorAll(".grid button").forEach(b=>b.onclick=()=>{T.idx=+b.dataset.n;renderQ();});
+  const on=(id,fn)=>{const el=document.getElementById(id);if(el)el.onclick=fn;};
+  on("prev",()=>{T.idx--;renderQ();});
+  on("next",()=>{T.idx++;renderQ();});
+  const ask=()=>{T.confirm=true;renderQ();document.getElementById("cyes").focus();};
+  on("fin",ask); on("fin2",ask);
+  on("cno",()=>{T.confirm=false;renderQ();});
+  on("cyes",submit);
+}
+function confirmBox(left){
+  return `<div class="confirm" role="alertdialog" aria-label="Аяқтауды растау">
+    <b>Тестті аяқтайсыз ба?</b>
+    <span>${left>0?`Жауап берілмеген сұрақ: <b>${left}</b>. Олар қате деп есептеледі.`:"Барлық сұраққа жауап бердіңіз."} Аяқтағаннан кейін жауапты өзгерту мүмкін емес.</span>
+    <p class="err" id="serr"></p>
+    <div class="row"><button class="btn" id="cyes">Иә, аяқтау</button><button class="btn ghost" id="cno">Жалғастыру</button></div>
+  </div>`;
+}
+async function submit(){
+  const btn=document.getElementById("cyes"); btn.disabled=true; btn.textContent="Жіберілуде…";
+  clearTimeout(T.timer);
+  while(T.saving) await new Promise(r=>setTimeout(r,200));
+  try{
+    const r=await api({action:"submit",code:T.code,answers:T.answers});
+    if(r.ok||r.error==="already_done"){store.del("tt_"+T.code);return renderDone(T.name,r);}
+    throw {};
+  }catch(e){
+    btn.disabled=false; btn.textContent="Иә, аяқтау";
+    document.getElementById("serr").textContent="Жіберу мүмкін болмады. "+netMsg(e);
+  }
+}
+function renderDone(name,r){
+  const total=r.total||30;
+  $app.className="wrap";
+  $app.innerHTML=`
+  <div class="card">
+    <span class="eyebrow">Тест аяқталды</span>
+    <h1>Рахмет, ${esc(name)}!</h1>
+    <p class="muted">Жауаптарыңыз әкімшіге жіберілді.</p>
+    <div class="ornament" aria-hidden="true"></div>
+    <div class="row" style="gap:24px;align-items:flex-end">
+      <div><div class="score">${esc(r.score)}<span style="font-size:1.4rem;color:var(--muted)">/${total}</span></div><span class="muted">Жалпы нәтиже</span></div>
+      <div><b style="font-size:1.3rem">${esc(r.kz)}/${total/2}</b><br><span class="muted">Қазақстан тарихы</span></div>
+      <div><b style="font-size:1.3rem">${esc(r.w)}/${total/2}</b><br><span class="muted">Дүниежүзі тарихы</span></div>
+    </div>
+    <button class="btn ghost" id="out">Шығу</button>
+  </div>`;
+  document.getElementById("out").onclick=()=>renderLogin();
+}
+
+/* ---------- Әкімші ---------- */
+function renderAdmin(code,rows){
+  const done=rows.filter(r=>r.status==="done");
+  const avg=done.length?(done.reduce((a,r)=>a+Number(r.score||0),0)/done.length).toFixed(1):"—";
+  $app.className="wrap wide";
+  $app.innerHTML=`
+  <div class="card">
+    <div class="row between"><div><span class="eyebrow">Әкімші</span><h1>Мұғалімдер нәтижесі</h1></div>
+      <div class="row"><button class="btn ghost" id="ref">Жаңарту</button><button class="btn ghost" id="out">Шығу</button></div></div>
+    <p class="muted">Тапсырды: <b>${done.length}/${rows.length}</b> · Орташа балл: <b>${avg}</b> / 30. Әр сұрақ бойынша толық жауаптар Google кестедегі «Жауаптар» парағында.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Мұғалім</th><th>Код</th><th>Күйі</th><th>Балл</th><th>ҚР тарихы</th><th>Дүниежүзі</th><th>Уақыты</th><th>Аяқтады</th></tr></thead>
+      <tbody>${rows.map(r=>{
+        const d=r.status==="done";
+        const st=r.status==="none"?`<span class="st none">Кірмеген</span>`:d?`<span class="st done">Тапсырды</span>`:`<span class="st started">Тапсыруда · ${r.answered}/30</span>`;
+        return `<tr><td><b>${esc(r.name)}</b></td><td class="code">${esc(r.code)}</td><td>${st}</td>
+          <td><b>${d?esc(r.score)+"/30":"—"}</b></td><td>${d?esc(r.kz)+"/15":"—"}</td><td>${d?esc(r.w)+"/15":"—"}</td>
+          <td>${d?esc(r.minutes)+" мин":"—"}</td><td>${d?esc(r.finished):"—"}</td></tr>`;}).join("")}</tbody>
+    </table></div>
+  </div>`;
+  document.getElementById("out").onclick=()=>renderLogin();
+  document.getElementById("ref").onclick=async e=>{
+    e.target.disabled=true;e.target.textContent="Жүктелуде…";
+    try{const r=await api({action:"login",code});renderAdmin(code,r.rows);}catch(x){e.target.disabled=false;e.target.textContent="Жаңарту";}
+  };
+}
+
+renderLogin();
+</script>
+</body>
+</html>
